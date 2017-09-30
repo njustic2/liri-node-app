@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "inquirer": "^3.3.0",
-    "node-spotify-api": "^1.0.7"
+    "node-spotify-api": "^1.0.7",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "webpack": "^3.6.0"
