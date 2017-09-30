@@ -15,19 +15,12 @@ var spotify = new Spotify({// a variable that ties in the spotify API keys
   secret: 'e71ee5e3007e46c6b16ab1b584cfc3e5'
 });
 
-var client = new Twitter({ //a variable that ties in the Twitter API keys
+var twitterKeys = new Twitter({ //a variable that ties in the Twitter API keys
 	consumer_key: 'raNfCTqlRU0nOondQz2GkJIlO',
  	consumer_secret: 'Y9OlPdisn9lLdaQvFa65cbDjXdZezSWV6NS2SR7YW5IEBpvjVF',
  	access_token_key: '884964564642791424-iSgdYDR0fg1EXn44qGdjZaTPGGwPTv2',
  	access_token_secret: 'EbqolyjFETwAR0JULRrNIP6zU6uKmfK5C2JIhsD9wlm3J'
 });
-
-
-var Request = new Request({// a variable that ties in the spotify API keys
-  id:  '',
-  secret: ''
-});
-console.log(keys);
 
 function chooseQuery(input) {	//a function that calls a switch case that passses in userInput
 	
@@ -57,8 +50,8 @@ chooseQuery(userInput)	//passes the user input in to the switch case
 	//pulls from twitter and parses out the last 20 tweets from a twitter account with dates
 	function tweeting() {
 	//The next command envokes the twitter api keys, parses out the timeline and passes into a function that pulls 20 tweets
-	client.get('statuses/user_timeline', params, function(error, tweets, response) 
-	  	for(i = 0; i < tweets.length; i++) { //passes each of the 20 or less tweets into a variable
+	twitterKeys.get('statuses/user_timeline', params, function(error, tweets, response){
+			for(i = 0; i < tweets.length; i++) { //passes each of the 20 or less tweets into a variable
 	  		console.log("------------------------------------------------------------");//displays the tweets in the console
 	    	console.log("Today's tweet: " + tweets[i].text);
 	    	console.log("-")
@@ -94,7 +87,7 @@ chooseQuery(userInput)	//passes the user input in to the switch case
 	};
 
 	function movies() {	//pulls from the omdb database using an api request and passes in a JSON packet
-		request('http://www.omdbapi.com/?apikey= ' + (userInputTwo || "What ya like? ")
+		request('http://www.omdbapi.com/?apikey=40e9cece' + (userInputTwo || "What ya like? ")
 			+ `&tomatoes=true`, function (err, response, body) {
   		  		var bodyObj = JSON.parse(body);	//creates a variable from the JSON packet
 		  		console.log("------------------------------------------------------------");
