@@ -8,6 +8,7 @@ var keys = require("./keys");// used as instructed in the homework
 
 var userInput = process.argv[2]; // my-tweets, spotify-this-song, movie-this
 var userInputTwo = process.argv[3];	//a variable to hold the next command line input 
+var params = {screen_name: 'My tweets'}; //ties in a specific twitter account
 
 console.log(keys);
 var spotify = new Spotify({// a variable that ties in the spotify API keys
@@ -31,6 +32,7 @@ function chooseQuery(input) {	//a function that calls a switch case that passses
 	    break;
 	  	
 	  	case "spotify-this-song":
+	  		console.log('running songs');
 	   		songs();
 	    break;
 	  	
@@ -43,9 +45,11 @@ function chooseQuery(input) {	//a function that calls a switch case that passses
 	    break;
 	}
 };
- 
+
 chooseQuery(userInput)	//passes the user input in to the switch case
 // the user's typed command to fire either get tweets, spotify song or omdb movie information
+ 
+
 
 	//pulls from twitter and parses out the last 20 tweets from a twitter account with dates
 	function tweeting() {
@@ -67,6 +71,7 @@ chooseQuery(userInput)	//passes the user input in to the switch case
 	  				});
 	    }
 	});
+}
 
 	function songs() {	//pulls from spotify using the api keys to get and object with information about the inputted moivie
 	
@@ -87,9 +92,12 @@ chooseQuery(userInput)	//passes the user input in to the switch case
 	};
 
 	function movies() {	//pulls from the omdb database using an api request and passes in a JSON packet
-		request('http://www.omdbapi.com/?apikey=40e9cece' + (userInputTwo || "What ya like? ")
-			+ `&tomatoes=true`, function (err, response, body) {
+		var url = 'http://www.omdbapi.com/?apikey=40e9cece&t=' + (userInputTwo || "What ya like? ")
+			+ `&tomatoes=true`;
+			console.log(url);
+		Request(url, function (err, response, body) {
   		  		var bodyObj = JSON.parse(body);	//creates a variable from the JSON packet
+  		  		console.log(bodyObj);
 		  		console.log("------------------------------------------------------------");
 		  		console.log("Movie Title: " + bodyObj.Title);
 		  		console.log("Release Year: " + bodyObj.Year);
@@ -125,4 +133,4 @@ chooseQuery(userInput)	//passes the user input in to the switch case
 	        	if (err){return console.log(err);}
 	        });
 	    };
-	};
+
